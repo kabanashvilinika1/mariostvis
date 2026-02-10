@@ -1,152 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Valentine 🌷🤍</title>
 
-<style>
-body {
-  margin: 0;
-  padding: 20px;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(180deg, #eaf4ff, #ffffff);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
-.card {
-  background: white;
-  max-width: 420px;
-  width: 100%;
-  padding: 40px 25px;
-  border-radius: 24px;
-  text-align: center;
-  box-shadow: 0 20px 40px rgba(0, 90, 255, 0.18);
-}
-
-h1 {
-  color: #2b6cb0;
-  font-size: 2.2rem;
-}
-
-p {
-  color: #4a5568;
-  font-size: 1.15rem;
-  margin-bottom: 30px;
-}
-
-.buttons {
-  position: relative;
-  height: 120px;
-}
-
-button {
-  padding: 14px 30px;
-  font-size: 1.05rem;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-}
-
-#yesBtn {
-  background: #2b6cb0;
-  color: white;
-}
-
-#noBtn {
-  position: absolute;
-  background: #edf2f7;
-  color: #2b6cb0;
-  left: 50%;
-  top: 65px;
-  transform: translateX(-50%);
-}
-
-textarea {
-  width: 100%;
-  height: 90px;
-  border-radius: 14px;
-  padding: 10px;
-  border: 1px solid #cbd5e0;
-  font-size: 1rem;
-  margin-top: 20px;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="card" id="card">
-  <h1>🌷 Will you be my Valentine?</h1>
-  <p>I have something special planned 🤍</p>
+<!-- Floating emojis container -->
+<div class="flowers" id="flowers"></div>
 
-  <div class="buttons" id="buttons">
-    <button id="yesBtn">Yes 🤍</button>
-    <button id="noBtn">No</button>
-  </div>
+<div class="card" id="card">
+
+    <h1>🌷 Will you be my Valentine?</h1>
+    <p class="subtitle">I have something special planned 🤍</p>
+
+    <div class="buttons" id="buttons">
+        <button id="yesBtn">Yes 🤍</button>
+        <button id="noBtn">No</button>
+    </div>
+
 </div>
 
-<audio id="bgMusic" loop>
-  <source src="Bad Bunny - DtMF (Letra).mp3" type="audio/mpeg">
-</audio>
 
 <script>
-const webhookURL = "https://discord.com/api/webhooks/1470781337706303610/q87ABBCK5JyFX78zKe-Z-qiCmKraQMW5mOd6pzg_EuxlZGqtPcjjxnNBPS_y3X_qJ3t9";
+
+/* ================= DISCORD WEBHOOK ================= */
+
+const webhookURL = "PUT_YOUR_DISCORD_WEBHOOK_HERE";
+
+
+/* ================= RUNAWAY NO BUTTON ================= */
 
 const noBtn = document.getElementById("noBtn");
+
 noBtn.addEventListener("mouseover", () => {
-  const x = Math.random() * 220 - 110;
-  const y = Math.random() * 90 - 45;
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+
+    const x = Math.random() * 250 - 125;
+    const y = Math.random() * 250 - 125;
+
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
 });
 
+
+/* ================= YES BUTTON ================= */
+
 document.getElementById("yesBtn").onclick = () => {
-  document.getElementById("bgMusic").play();
 
-  const device =
-    /iPhone/i.test(navigator.userAgent) ? "iPhone" :
-    /Android/i.test(navigator.userAgent) ? "Android" :
-    "Desktop";
+    const device =
+        /iPhone/i.test(navigator.userAgent) ? "iPhone" :
+        /Android/i.test(navigator.userAgent) ? "Android" :
+        "Desktop";
 
-  document.getElementById("card").innerHTML = `
-    <h1>chemo cimcimaa🤍🌷 chemo varskvlavoo⭐️ minda Ragaca gitxraa⭐️ 
-pirve rigshi dabadebisdgess gilocav chemo varskvlavo⭐️ chemo adamiano sul bednieri undaamyavde⭐️
-chemi valentini homiknebi?😊😝 chemi ertaderti siyvaruxlixar patarav..🫦🫦
-Miyvarxar siforcxle🫦 gilocav shendgessss chemo cimcima varskvlavo⭐️ chemo 10-wliano siyvarulo chemo bavshvobav chemo yvelafero🌟🤍 </h1>
-    <p>Write me something 💌</p>
-    <textarea id="msg" placeholder="Type your message..."></textarea>
-    <br><br>
-    <button onclick="sendDiscord()">Send 🤍</button>
-  `;
+    document.getElementById("card").innerHTML = `
+        <h1>🌷 Yay!! 🤍</h1>
 
-  fetch(webhookURL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      content: `🌷 **Valentine agreed!** 🤍\n📱 Device: **${device}**`
-    })
-  });
+        <div class="editable-note" contenteditable="true">
+Write your valentine note here...
+(You can edit this text anytime)
+        </div>
+
+        <textarea id="msg" placeholder="Send me a message 💌"></textarea>
+
+        <button id="sendReply">Send 🤍</button>
+    `;
+
+
+    /* send YES notification */
+    fetch(webhookURL,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+            content:`🌷 Valentine agreed! 🤍\n📱 Device: ${device}`
+        })
+    });
+
+
+    /* SEND MESSAGE */
+    document.getElementById("sendReply").onclick = () => {
+
+        const message =
+            document.getElementById("msg").value || "(no message)";
+
+        fetch(webhookURL,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({
+                content:`💌 Message from your Valentine:\n${message}`
+            })
+        });
+
+        document.getElementById("card").innerHTML = `
+            <h1>Message sent 🤍</h1>
+            <p>Can't wait to see you 🌷</p>
+        `;
+    };
+
 };
 
-function sendDiscord() {
-  const text = document.getElementById("msg").value;
 
-  fetch(webhookURL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      content: `💌 Message from your Valentine:\n"${text}"`
-    })
-  });
 
-  document.getElementById("card").innerHTML = `
-    <h1>🤍 Sent!</h1>
-    <p>I’ll see your message 🌷</p>
-  `;
-}
+/* ================= FLOATING FLOWERS ================= */
+
+const container = document.getElementById("flowers");
+
+setInterval(()=>{
+
+    const flower = document.createElement("span");
+
+    flower.innerHTML = Math.random() > 0.5 ? "🌷" : "🤍";
+
+    flower.style.left = Math.random()*100 + "vw";
+    flower.style.fontSize = (18 + Math.random()*25) + "px";
+    flower.style.animationDuration = (6 + Math.random()*6) + "s";
+
+    container.appendChild(flower);
+
+    setTimeout(()=>flower.remove(),12000);
+
+}, 400);
+
 </script>
 
 </body>
