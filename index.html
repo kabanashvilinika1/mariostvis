@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>One moment…</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(180deg, #eaf4ff, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .card {
+      background: white;
+      max-width: 420px;
+      width: 100%;
+      padding: 40px 25px;
+      border-radius: 22px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 100, 255, 0.15);
+    }
+
+    h1 {
+      color: #2b6cb0;
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #4a5568;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      position: relative;
+      height: 120px;
+    }
+
+    button {
+      padding: 12px 26px;
+      font-size: 1rem;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #yesBtn {
+      background: #2b6cb0;
+      color: white;
+    }
+
+    #yesBtn:hover {
+      background: #1e4e8c;
+    }
+
+    #noBtn {
+      position: absolute;
+      background: #edf2f7;
+      color: #2b6cb0;
+      left: 50%;
+      top: 60px;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>🌷 One moment…</h1>
+    <p>Something special is waiting 🤍</p>
+
+    <div class="buttons">
+      <button id="yesBtn">Yes 🤍</button>
+      <button id="noBtn">No</button>
+    </div>
+  </div>
+
+  <!-- 🎵 MUSIC (optional)
+  <audio autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+  -->
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 80 - 40;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    document.getElementById("yesBtn").onclick = () => {
+      document.body.innerHTML = `
+        <div style="
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          min-height:100vh;
+          font-family:Segoe UI;
+          background:linear-gradient(180deg,#eaf4ff,#ffffff);
+          text-align:center;
+        ">
+          <h1 style="color:#2b6cb0;">
+            🌷 Yay! You chose yes 🤍
+          </h1>
+        </div>
+      `;
+    };
+  </script>
+</body>
+</html>
