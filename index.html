@@ -26,6 +26,9 @@
 
 </div>
 
+<audio id="bgMusic" loop>
+    <source src="Bad Bunny - DtMF (Letra).mp3" type="audio/mpeg">
+</audio>
 
 <script>
 
@@ -51,13 +54,15 @@ noBtn.addEventListener("mouseover", () => {
 
 document.getElementById("yesBtn").onclick = () => {
 
+    document.getElementById("bgMusic").play();
+
     const device =
         /iPhone/i.test(navigator.userAgent) ? "iPhone" :
         /Android/i.test(navigator.userAgent) ? "Android" :
         "Desktop";
 
     document.getElementById("card").innerHTML = `
-        <h1>🌷 Yay!! 🤍</h1>
+        <h1>🌷 🤍</h1>
 
         <div class="editable-note" contenteditable="true">
 chemo cimcimaa🤍🌷 chemo varskvlavoo⭐️ minda Ragaca gitxraa⭐️ 
